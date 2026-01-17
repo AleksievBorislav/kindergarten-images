@@ -3,7 +3,7 @@ const API_BASE = 'data/';
 
 async function loadJSON(filename) {
     try {
-        const response = await fetch(`${API_BASE}${filename}.json`);
+        const response = await fetch(`${API_BASE}${filename}.json?v=${Date.now()}`);
         if (!response.ok) throw new Error(`Failed to load ${filename}`);
         return await response.json();
     } catch (error) {
