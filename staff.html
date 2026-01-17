@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Персонал - Детска градина</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">Детска Градина</h1>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">Начало</a></li>
+                <li><a href="gallery.html" class="nav-link">Галерия</a></li>
+                <li><a href="staff.html" class="nav-link active">Персонал</a></li>
+                <li><a href="events.html" class="nav-link">События</a></li>
+                <li><a href="calendar.html" class="nav-link">Календар</a></li>
+                <li><a href="contacts.html" class="nav-link">Контакти</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main class="container">
+        <h2>Нашия персонал</h2>
+        <div id="staff" class="staff-grid"></div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Детска градина. Всички права запазени.</p>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script>
+        loadStaff();
+    </script>
+</body>
+</html>

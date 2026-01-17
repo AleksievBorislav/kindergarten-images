@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ панел - Редактиране</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        .admin-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 20px;
+        }
+
+        .admin-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .tab-btn.active {
+            background: #764ba2;
+        }
+
+        .tab-btn:hover {
+            background: #764ba2;
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #667eea;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="date"],
+        input[type="time"],
+        textarea,
+        select {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        button {
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #764ba2;
+        }
+
+        button.danger {
+            background: #e74c3c;
+        }
+
+        button.danger:hover {
+            background: #c0392b;
+        }
+
+        .item-list {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .item {
+            padding: 1rem;
+            background: #f9f9f9;
+            border-left: 3px solid #667eea;
+            margin-bottom: 1rem;
+            border-radius: 4px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-content {
+            flex: 1;
+        }
+
+        .item-title {
+            font-weight: bold;
+            color: #333;
+        }
+
+        .item-subtitle {
+            color: #999;
+            font-size: 0.9rem;
+        }
+
+        .item-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .item-actions button {
+            padding: 0.5rem 1rem;
+            font-size: 0.9rem;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-left: 3px solid #ffc107;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+
+        .success {
+            background: #d4edda;
+            border-left: 3px solid #28a745;
+            padding: 1rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            color: #155724;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <h1 class="logo">Админ Панел</h1>
+            <ul class="nav-menu">
+                <li><a href="../index.html" class="nav-link">Преглед на сайта</a></li>
+                <li><a href="#" class="nav-link" onclick="logout()">Изход</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="admin-container">
+        <h2>Управление на съдържанието</h2>
+        <div class="warning">
+            ⚠️ Този админ панел се нуждае от GitHub издание. За сега, редактирайте JSON файловете директно в репозиторията.
+        </div>
+
+        <div class="admin-tabs">
+            <button class="tab-btn active" onclick="switchTab('articles')">Статии</button>
+            <button class="tab-btn" onclick="switchTab('gallery')">Галерия</button>
+            <button class="tab-btn" onclick="switchTab('staff')">Персонал</button>
+            <button class="tab-btn" onclick="switchTab('events')">События</button>
+            <button class="tab-btn" onclick="switchTab('contacts')">Контакти</button>
+        </div>
+
+        <!-- Articles Tab -->
+        <div id="articles" class="tab-content active">
+            <div class="form-group">
+                <h3>Добави нова статия</h3>
+                <label>Заглавие:</label>
+                <input type="text" id="articleTitle" placeholder="Введите заглавието">
+                
+                <label>Съдържание:</label>
+                <textarea id="articleContent" placeholder="Введите съдържанието"></textarea>
+                
+                <button onclick="addArticle()">Добави статия</button>
+            </div>
+
+            <div class="item-list" id="articlesList"></div>
+        </div>
+
+        <!-- Gallery Tab -->
+        <div id="gallery" class="tab-content">
+            <div class="form-group">
+                <h3>Добави снимка</h3>
+                <label>Заглавие:</label>
+                <input type="text" id="galleryTitle" placeholder="Введите заглавието на снимката">
+                
+                <label>URL на снимка:</label>
+                <input type="text" id="galleryUrl" placeholder="https://example.com/image.jpg">
+                
+                <button onclick="addGalleryImage()">Добави снимка</button>
+            </div>
+
+            <div class="item-list" id="galleryList"></div>
+        </div>
+
+        <!-- Staff Tab -->
+        <div id="staff" class="tab-content">
+            <div class="form-group">
+                <h3>Добави член на персонала</h3>
+                <label>Име:</label>
+                <input type="text" id="staffName" placeholder="Введите името">
+                
+                <label>Позиция:</label>
+                <input type="text" id="staffPosition" placeholder="Введите позицията">
+                
+                <label>Биография:</label>
+                <textarea id="staffBio" placeholder="Введите биографията"></textarea>
+                
+                <label>Фотография URL:</label>
+                <input type="text" id="staffPhoto" placeholder="https://example.com/photo.jpg">
+                
+                <button onclick="addStaffMember()">Добави членa</button>
+            </div>
+
+            <div class="item-list" id="staffList"></div>
+        </div>
+
+        <!-- Events Tab -->
+        <div id="events" class="tab-content">
+            <div class="form-group">
+                <h3>Добави събитие</h3>
+                <label>Заглавие:</label>
+                <input type="text" id="eventTitle" placeholder="Введите заглавието">
+                
+                <label>Дата:</label>
+                <input type="date" id="eventDate">
+                
+                <label>Време:</label>
+                <input type="time" id="eventTime">
+                
+                <label>Описание:</label>
+                <textarea id="eventDescription" placeholder="Введите описанието"></textarea>
+                
+                <button onclick="addEvent()">Добави събитие</button>
+            </div>
+
+            <div class="item-list" id="eventsList"></div>
+        </div>
+
+        <!-- Contacts Tab -->
+        <div id="contacts" class="tab-content">
+            <div class="form-group">
+                <h3>Редактирай контактна информация</h3>
+                <label>Адрес:</label>
+                <input type="text" id="contactAddress" placeholder="Адрес">
+                
+                <label>Телефон:</label>
+                <input type="tel" id="contactPhone" placeholder="+359 2 123 4567">
+                
+                <label>Email:</label>
+                <input type="email" id="contactEmail" placeholder="email@example.com">
+                
+                <label>Директор:</label>
+                <input type="text" id="contactDirector" placeholder="Име на директора">
+                
+                <label>Работни дни:</label>
+                <input type="text" id="contactDays" placeholder="Понеделник - Петък">
+                
+                <label>Работно време:</label>
+                <input type="text" id="contactHours" placeholder="08:00 - 17:00">
+                
+                <button onclick="updateContacts()">Обнови контакти</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Админ панел. За сега редактирайте JSON файловете директно.</p>
+    </footer>
+
+    <script>
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            // Remove active class from all buttons
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+
+        function logout() {
+            // Simple logout - in real implementation, clear auth token
+            alert('Изход от админ панел');
+            window.location.href = '../index.html';
+        }
+
+        // Placeholder functions for admin actions
+        function addArticle() {
+            alert('За добавяне на статии, редактирайте data/articles.json и направете push към GitHub');
+        }
+
+        function addGalleryImage() {
+            alert('За добавяне на снимки, редактирайте data/gallery.json и направете push към GitHub');
+        }
+
+        function addStaffMember() {
+            alert('За добавяне на членове на персонала, редактирайте data/staff.json и направете push към GitHub');
+        }
+
+        function addEvent() {
+            alert('За добавяне на събития, редактирайте data/events.json и направете push към GitHub');
+        }
+
+        function updateContacts() {
+            alert('За обновяване на контакти, редактирайте data/contacts.json и направете push към GitHub');
+        }
+    </script>
+</body>
+</html>

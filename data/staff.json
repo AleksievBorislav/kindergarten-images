@@ -1,0 +1,25 @@
+{
+  "members": [
+    {
+      "id": 1,
+      "name": "Мария Иванова",
+      "position": "Директор",
+      "bio": "Опытен педагог с 15 години опит в работа с деца.",
+      "photo": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/staff/maria-ivanova.jpg"
+    },
+    {
+      "id": 2,
+      "name": "Петя Петрова",
+      "position": "Учителка",
+      "bio": "Специалист по ранното развитие на детето.",
+      "photo": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/staff/petya-petrova.jpg"
+    },
+    {
+      "id": 3,
+      "name": "Софія Станчева",
+      "position": "Помощник",
+      "bio": "Любозлобна и отговорна помощник на персонала.",
+      "photo": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/staff/sofia-stancheva.jpg"
+    }
+  ]
+}

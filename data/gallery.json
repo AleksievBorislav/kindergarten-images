@@ -1,0 +1,24 @@
+{
+  "images": [
+    {
+      "id": 1,
+      "title": "Игра в градината",
+      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/playground.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Творческа дейност",
+      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/art-activity.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Детско тържество",
+      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/celebration.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Обучение",
+      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/learning.jpg"
+    }
+  ]
+}
