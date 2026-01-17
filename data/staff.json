@@ -3,14 +3,14 @@
     {
       "id": 1,
       "name": "Мария Иванова",
-      "position": "Директор",
+      "position": "Учител",
       "bio": "Опитен педагог с 15 години опит в работа с деца.",
       "photo": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/staff/maria-ivanova.jpg"
     },
     {
       "id": 2,
       "name": "Петя Петрова",
-      "position": "Учител",
+      "position": "Директор",
       "bio": "Специалист за ранното развитие на детето.",
       "photo": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/staff/petya-petrova.jpg"
     },
