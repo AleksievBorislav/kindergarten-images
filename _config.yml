@@ -1,0 +1,17 @@
+markdown: kramdown
+theme: null
+plugins: []
+
+# Cache control headers for GitHub Pages
+# Force browsers to always revalidate with server
+include:
+  - .htaccess
+  - _headers
+
+# Build settings
+keep_files:
+  - .git
+  - .github
+  - data
+  - js
+  - assets

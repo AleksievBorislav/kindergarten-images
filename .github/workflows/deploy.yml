@@ -20,3 +20,5 @@ jobs:
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ./
+        cname: aleksievborislav.github.io/kindergarten-images
+        force_orphan: true
