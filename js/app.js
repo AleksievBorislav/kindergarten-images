@@ -12,6 +12,40 @@ async function loadJSON(filename) {
     }
 }
 
+// Lightbox Event Listeners
+document.addEventListener('DOMContentLoaded', function() {
+    // Close lightbox with X button
+    const closeBtn = document.querySelector('.lightbox-close');
+    if (closeBtn) {
+        closeBtn.onclick = closeLightbox;
+    }
+    
+    // Close lightbox when clicking outside image
+    const lightbox = document.getElementById('lightbox');
+    if (lightbox) {
+        lightbox.onclick = function(event) {
+            if (event.target === lightbox) {
+                closeLightbox();
+            }
+        };
+    }
+    
+    // Next/Prev buttons
+    const prevBtn = document.querySelector('.lightbox-prev');
+    const nextBtn = document.querySelector('.lightbox-next');
+    if (prevBtn) prevBtn.onclick = prevImage;
+    if (nextBtn) nextBtn.onclick = nextImage;
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', function(event) {
+        if (!lightbox || !lightbox.classList.contains('active')) return;
+        
+        if (event.key === 'ArrowLeft') prevImage();
+        if (event.key === 'ArrowRight') nextImage();
+        if (event.key === 'Escape') closeLightbox();
+    });
+});
+
 // Articles
 async function loadArticles() {
     const data = await loadJSON('articles');
@@ -41,10 +75,49 @@ async function loadGallery() {
         return;
     }
 
-    container.innerHTML = data.images.map(image => `
-        <div class="gallery-item">
+    container.innerHTML = data.images.map((image, index) => `
+        <div class="gallery-item" onclick="openLightbox(${index})">
             <img src="${image.url || 'https://via.placeholder.com/300x200?text=Image'}" alt="${image.title}">
             <p>${image.title}</p>
+        </div>
+    `).join('');
+    
+    // Store gallery data globally for lightbox
+    window.galleryData = data.images;
+}
+
+let currentLightboxIndex = 0;
+
+function openLightbox(index) {
+    currentLightboxIndex = index;
+    const lightbox = document.getElementById('lightbox');
+    const img = document.getElementById('lightbox-img');
+    img.src = window.galleryData[index].url;
+    lightbox.classList.add('active');
+    updateLightboxThumbs();
+}
+
+function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+}
+
+function nextImage() {
+    currentLightboxIndex = (currentLightboxIndex + 1) % window.galleryData.length;
+    document.getElementById('lightbox-img').src = window.galleryData[currentLightboxIndex].url;
+    updateLightboxThumbs();
+}
+
+function prevImage() {
+    currentLightboxIndex = (currentLightboxIndex - 1 + window.galleryData.length) % window.galleryData.length;
+    document.getElementById('lightbox-img').src = window.galleryData[currentLightboxIndex].url;
+    updateLightboxThumbs();
+}
+
+function updateLightboxThumbs() {
+    const thumbsContainer = document.getElementById('lightbox-thumbs');
+    thumbsContainer.innerHTML = window.galleryData.map((image, index) => `
+        <div class="lightbox-thumb ${index === currentLightboxIndex ? 'active' : ''}" onclick="openLightbox(${index})">
+            <img src="${image.url}" alt="${image.title}">
         </div>
     `).join('');
 }
@@ -137,8 +210,12 @@ function generateCalendar() {
         const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         const hasEvent = eventDates.includes(dateStr);
         
+        // Calculate day of week (0 = Monday, 6 = Sunday, 5 = Saturday)
+        const dayOfWeek = (new Date(year, month, day).getDay() + 6) % 7;
+        const isWeekend = dayOfWeek === 5 || dayOfWeek === 6; // Saturday or Sunday
+        
         html += `
-            <div class="calendar-day ${isToday ? 'today' : ''} ${hasEvent ? 'has-event' : ''}" 
+            <div class="calendar-day ${isToday ? 'today' : ''} ${hasEvent ? 'has-event' : ''} ${isWeekend ? 'weekend' : ''}" 
                  onclick="selectDate('${dateStr}')">
                 ${day}
             </div>
@@ -190,17 +267,23 @@ async function selectDate(dateStr) {
     const dayName = dayNames[dateObj.getDay()];
     const month = monthNames[dateObj.getMonth()];
     const year = dateObj.getFullYear();
+    const dayOfWeek = (dateObj.getDay() + 6) % 7;
+    const isWeekend = dayOfWeek === 5 || dayOfWeek === 6;
     
-    let html = `<h3>${day} ${month} ${year} г. (${dayName})</h3>`;
+    let html = `<h3>${day} ${month} ${year} г. (${dayName})`;
+    if (isWeekend) {
+        html += ` <span style="background: #fff5e6; color: #c9944d; padding: 2px 8px; border-radius: 4px; font-size: 0.85em;">Почивен ден</span>`;
+    }
+    html += `</h3>`;
     
     if (data && data.events) {
         const eventsOnDate = data.events.filter(e => e.date.split('T')[0] === dateStr);
         
         if (eventsOnDate.length > 0) {
             html += eventsOnDate.map(event => `
-                <div class="calendar-event-item">
-                    <strong>${event.title}</strong><br>
-                    ⏰ ${event.time}
+                <div class="calendar-event-item" style="background: #fef9f3; border-left: 4px solid #d4a574;">
+                    <strong style="color: #d4a574; font-size: 1.1em;">📅 ${event.title}</strong><br>
+                    <span style="color: #c9944d; font-weight: 600;">⏰ ${event.time}</span>
                     <p>${event.description}</p>
                 </div>
             `).join('');

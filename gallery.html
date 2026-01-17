@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Галерия - Детска градина</title>
+    <title>Галерия - Обединени детски ясли Ботевград</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <nav class="navbar">
         <div class="nav-container">
-            <h1 class="logo">Детска Градина</h1>
+            <h1 class="logo">Обединени детски ясли Ботевград</h1>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link">Начало</a></li>
                 <li><a href="gallery.html" class="nav-link active">Галерия</a></li>
@@ -26,8 +26,21 @@
         <div id="gallery" class="gallery-grid"></div>
     </main>
 
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close">&times;</span>
+            <button class="lightbox-nav lightbox-prev">&#10094;</button>
+            <div class="lightbox-main">
+                <img id="lightbox-img" src="" alt="">
+            </div>
+            <button class="lightbox-nav lightbox-next">&#10095;</button>
+            <div class="lightbox-thumbs" id="lightbox-thumbs"></div>
+        </div>
+    </div>
+
     <footer>
-        <p>&copy; 2026 Детска градина. Всички права запазени.</p>
+        <p>&copy; 2026 Обединени детски ясли Ботевград. Всички права запазени.</p>
     </footer>
 
     <script src="js/app.js"></script>
