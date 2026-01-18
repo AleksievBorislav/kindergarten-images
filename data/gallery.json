@@ -1,24 +1,53 @@
 {
-  "images": [
+  "media": [
     {
       "id": 1,
       "title": "Игра в градината",
+      "type": "image",
+      "category": "Everyday activities",
       "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/playground.jpg"
     },
     {
       "id": 2,
       "title": "Творческа дейност",
+      "type": "image",
+      "category": "Everyday activities",
       "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/art-activty.jpg"
     },
     {
       "id": 3,
       "title": "Детско тържество",
+      "type": "image",
+      "category": "Events",
       "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/celebration.jpg"
     },
     {
       "id": 4,
       "title": "Обучение",
+      "type": "image",
+      "category": "Everyday activities",
       "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/learning.jpg"
+    },
+    {
+      "id": 5,
+      "title": "Екскурзия до София",
+      "type": "image",
+      "category": "Trip to Sofia",
+      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/trip-sofia.jpg"
+    },
+    {
+      "id": 6,
+      "title": "Видео от екскурзията",
+      "type": "video",
+      "category": "Trip to Sofia",
+      "url": "https://www.youtube.com/embed/sample-trip"
+    },
+    {
+      "id": 7,
+      "title": "Музикална игра",
+      "type": "video",
+      "category": "Everyday activities",
+      "url": "https://www.youtube.com/embed/sample-music"
     }
   ]
 }

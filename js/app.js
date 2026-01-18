@@ -56,68 +56,143 @@ async function loadArticles() {
         return;
     }
 
-    container.innerHTML = data.articles.map(article => `
-        <div class="article-card">
+    container.innerHTML = data.articles.map((article, index) => `
+        <div class="article-card" onclick="openArticleModal(${index})" style="cursor: pointer;">
             <h3>${article.title}</h3>
             <p class="date">${new Date(article.date).toLocaleDateString('bg-BG')}</p>
             <p>${article.content}</p>
         </div>
     `).join('');
+
+    // Store articles globally for modal
+    window.articlesData = data.articles;
 }
+
+function openArticleModal(index) {
+    const article = window.articlesData[index];
+    if (!article) return;
+
+    document.getElementById('modalTitle').textContent = article.title;
+    document.getElementById('modalDate').textContent = new Date(article.date).toLocaleDateString('bg-BG');
+    document.getElementById('modalContent').innerHTML = article.expandedContent || article.content;
+
+    const imagesContainer = document.getElementById('modalImages');
+    imagesContainer.innerHTML = (article.images || []).map(img => `<img src="${img}" alt="Article image">`).join('');
+
+    const videosContainer = document.getElementById('modalVideos');
+    videosContainer.innerHTML = (article.videos || []).map(video => `<iframe src="${video}" frameborder="0" allowfullscreen></iframe>`).join('');
+
+    document.getElementById('articleModal').style.display = 'block';
+}
+
+// Close modal when clicking close button
+document.addEventListener('DOMContentLoaded', function() {
+    const modal = document.getElementById('articleModal');
+    if (modal) {
+        const closeBtn = modal.querySelector('.close');
+        if (closeBtn) {
+            closeBtn.onclick = function() {
+                modal.style.display = 'none';
+            };
+        }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        };
+    }
+});
 
 // Gallery
 async function loadGallery() {
     const data = await loadJSON('gallery');
     const container = document.getElementById('gallery');
     
-    if (!data || !data.images) {
-        container.innerHTML = '<p>Няма налични снимки.</p>';
+    if (!data || !data.media) {
+        container.innerHTML = '<p>Няма налични медии.</p>';
         return;
     }
 
-    container.innerHTML = data.images.map((image, index) => `
-        <div class="gallery-item" onclick="openLightbox(${index})">
-            <img src="${image.url || 'https://via.placeholder.com/300x200?text=Image'}" alt="${image.title}">
-            <p>${image.title}</p>
+    // Group by category
+    const categories = {};
+    data.media.forEach(item => {
+        if (!categories[item.category]) {
+            categories[item.category] = [];
+        }
+        categories[item.category].push(item);
+    });
+
+    container.innerHTML = Object.keys(categories).map(category => `
+        <div class="gallery-category">
+            <h3>${category}</h3>
+            <div class="gallery-grid">
+                ${categories[category].map((item, index) => `
+                    <div class="gallery-item" onclick="openLightbox('${category}', ${index})">
+                        ${item.type === 'video' ? 
+                            `<iframe src="${item.url}" frameborder="0" allowfullscreen></iframe>` :
+                            `<img src="${item.url || 'https://via.placeholder.com/300x200?text=Image'}" alt="${item.title}">`
+                        }
+                        <p>${item.title}</p>
+                    </div>
+                `).join('')}
+            </div>
         </div>
     `).join('');
     
     // Store gallery data globally for lightbox
-    window.galleryData = data.images;
+    window.galleryData = categories;
 }
 
 let currentLightboxIndex = 0;
+let currentLightboxCategory = '';
 
-function openLightbox(index) {
+function openLightbox(category, index) {
+    currentLightboxCategory = category;
     currentLightboxIndex = index;
     const lightbox = document.getElementById('lightbox');
     const img = document.getElementById('lightbox-img');
-    img.src = window.galleryData[index].url;
+    const iframe = document.getElementById('lightbox-video');
+    const item = window.galleryData[category][index];
+    
+    if (item.type === 'video') {
+        img.style.display = 'none';
+        iframe.style.display = 'block';
+        iframe.src = item.url;
+    } else {
+        img.style.display = 'block';
+        iframe.style.display = 'none';
+        img.src = item.url;
+    }
+    
     lightbox.classList.add('active');
     updateLightboxThumbs();
 }
 
 function closeLightbox() {
     document.getElementById('lightbox').classList.remove('active');
+    // Stop video
+    const iframe = document.getElementById('lightbox-video');
+    iframe.src = '';
 }
 
 function nextImage() {
-    currentLightboxIndex = (currentLightboxIndex + 1) % window.galleryData.length;
-    document.getElementById('lightbox-img').src = window.galleryData[currentLightboxIndex].url;
-    updateLightboxThumbs();
+    const categoryItems = window.galleryData[currentLightboxCategory];
+    currentLightboxIndex = (currentLightboxIndex + 1) % categoryItems.length;
+    openLightbox(currentLightboxCategory, currentLightboxIndex);
 }
 
 function prevImage() {
-    currentLightboxIndex = (currentLightboxIndex - 1 + window.galleryData.length) % window.galleryData.length;
-    document.getElementById('lightbox-img').src = window.galleryData[currentLightboxIndex].url;
-    updateLightboxThumbs();
+    const categoryItems = window.galleryData[currentLightboxCategory];
+    currentLightboxIndex = (currentLightboxIndex - 1 + categoryItems.length) % categoryItems.length;
+    openLightbox(currentLightboxCategory, currentLightboxIndex);
 }
 
 function updateLightboxThumbs() {
     const thumbsContainer = document.getElementById('lightbox-thumbs');
-    thumbsContainer.innerHTML = window.galleryData.map((image, index) => `
-        <div class="lightbox-thumb ${index === currentLightboxIndex ? 'active' : ''}" onclick="openLightbox(${index})">
-            <img src="${image.url}" alt="${image.title}">
+    const categoryItems = window.galleryData[currentLightboxCategory];
+    thumbsContainer.innerHTML = categoryItems.map((item, index) => `
+        <div class="lightbox-thumb ${index === currentLightboxIndex ? 'active' : ''}" onclick="openLightbox('${currentLightboxCategory}', ${index})">
+            ${item.type === 'video' ? '<div class="video-thumb">🎥</div>' : `<img src="${item.url}" alt="${item.title}">`}
         </div>
     `).join('');
 }
