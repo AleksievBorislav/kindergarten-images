@@ -1,5 +1,6 @@
 // Load content from JSON files
 const API_BASE = 'data/';
+const SITE_NAME = "Обединени детски ясли";
 
 async function loadJSON(filename) {
     try {
@@ -14,6 +15,15 @@ async function loadJSON(filename) {
 
 // Lightbox Event Listeners
 document.addEventListener('DOMContentLoaded', function() {
+    // Set site name in all logo elements
+    document.querySelectorAll('.logo').forEach(el => el.textContent = SITE_NAME);
+    
+    // Replace site name in title and footer
+    document.title = document.title.replace('Детски ясли Града', SITE_NAME);
+    document.querySelectorAll('footer p').forEach(el => {
+        el.innerHTML = el.innerHTML.replace('Детски ясли Града', SITE_NAME);
+    });
+    
     // Close lightbox with X button
     const closeBtn = document.querySelector('.lightbox-close');
     if (closeBtn) {
@@ -103,6 +113,60 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 });
 
+// Testimonials
+async function loadTestimonials() {
+    const data = await loadJSON('testimonials');
+    const container = document.getElementById('testimonials');
+    
+    if (!data || !data.testimonials) {
+        container.innerHTML = '<p>Няма налични отзиви.</p>';
+        return;
+    }
+
+    container.innerHTML = data.testimonials.map(testimonial => `
+        <div class="testimonial-card">
+            <img src="${testimonial.photo || 'https://via.placeholder.com/80x80?text=Photo'}" alt="${testimonial.name}">
+            <p>"${testimonial.text}"</p>
+            <div class="name">${testimonial.name}</div>
+        </div>
+    `).join('');
+}
+
+// FAQ
+async function loadFAQ() {
+    const data = await loadJSON('faq');
+    const container = document.getElementById('faq');
+    
+    if (!data || !data.faqs) {
+        container.innerHTML = '<p>Няма налични въпроси.</p>';
+        return;
+    }
+
+    container.innerHTML = data.faqs.map(faq => `
+        <div class="faq-item">
+            <div class="faq-question" onclick="toggleFAQ(this)">
+                ${faq.question}
+                <span class="faq-toggle">+</span>
+            </div>
+            <div class="faq-answer">
+                ${faq.answer}
+            </div>
+        </div>
+    `).join('');
+}
+
+function toggleFAQ(element) {
+    const answer = element.nextElementSibling;
+    const toggle = element.querySelector('.faq-toggle');
+    if (answer.style.display === 'block') {
+        answer.style.display = 'none';
+        toggle.textContent = '+';
+    } else {
+        answer.style.display = 'block';
+        toggle.textContent = '-';
+    }
+}
+
 // Gallery
 async function loadGallery() {
     const data = await loadJSON('gallery');
@@ -122,25 +186,34 @@ async function loadGallery() {
         categories[item.category].push(item);
     });
 
-    container.innerHTML = Object.keys(categories).map(category => `
+    container.innerHTML = Object.keys(categories).map(category => {
+        const items = categories[category];
+        const stackItems = items.slice(0, 5);
+        const hasMore = items.length > 5;
+        
+        return `
         <div class="gallery-category">
-            <h3>${category}</h3>
-            <div class="gallery-grid">
-                ${categories[category].map((item, index) => `
-                    <div class="gallery-item" onclick="openLightbox('${category}', ${index})">
+            <h3 onclick="openCategoryLightbox('${category}')">${category}</h3>
+            <div class="gallery-stack" onclick="openCategoryLightbox('${category}')">
+                ${stackItems.map((item, index) => `
+                    <div class="gallery-item stack-item" style="left: ${index * 210}px;">
                         ${item.type === 'video' ? 
-                            `<iframe src="${item.url}" frameborder="0" allowfullscreen></iframe>` :
-                            `<img src="${item.url || 'https://via.placeholder.com/300x200?text=Image'}" alt="${item.title}">`
+                            `<iframe src="${item.url}" frameborder="0" allowfullscreen onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"></iframe><div style="display:none; text-align:center; height:200px; display:flex; align-items:center; justify-content:center;">🎥 Видео не е налично</div>` :
+                            `<img src="${item.url || 'https://via.placeholder.com/300x200?text=Image'}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/300x200?text=Broken+Image'">`
                         }
-                        <p>${item.title}</p>
                     </div>
                 `).join('')}
+                ${hasMore ? `<div class="more-indicator">+${items.length - 5} повече</div>` : ''}
             </div>
         </div>
-    `).join('');
+    `;}).join('');
     
     // Store gallery data globally for lightbox
     window.galleryData = categories;
+}
+
+function openCategoryLightbox(category) {
+    openLightbox(category, 0);
 }
 
 let currentLightboxIndex = 0;
@@ -158,10 +231,21 @@ function openLightbox(category, index) {
         img.style.display = 'none';
         iframe.style.display = 'block';
         iframe.src = item.url;
+        iframe.onerror = function() {
+            this.style.display = 'none';
+            const errorMsg = document.createElement('div');
+            errorMsg.textContent = 'Видео не е налично';
+            errorMsg.style.textAlign = 'center';
+            errorMsg.style.padding = '20px';
+            this.parentNode.appendChild(errorMsg);
+        };
     } else {
         img.style.display = 'block';
         iframe.style.display = 'none';
         img.src = item.url;
+        img.onerror = function() {
+            this.src = 'https://via.placeholder.com/600x400?text=Broken+Image';
+        };
     }
     
     lightbox.classList.add('active');
@@ -192,7 +276,7 @@ function updateLightboxThumbs() {
     const categoryItems = window.galleryData[currentLightboxCategory];
     thumbsContainer.innerHTML = categoryItems.map((item, index) => `
         <div class="lightbox-thumb ${index === currentLightboxIndex ? 'active' : ''}" onclick="openLightbox('${currentLightboxCategory}', ${index})">
-            ${item.type === 'video' ? '<div class="video-thumb">🎥</div>' : `<img src="${item.url}" alt="${item.title}">`}
+            ${item.type === 'video' ? '<div class="video-thumb">🎥</div>' : `<img src="${item.url}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/60x60?text=X'">`}
         </div>
     `).join('');
 }

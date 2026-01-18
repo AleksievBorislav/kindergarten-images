@@ -17,7 +17,7 @@
 ├── index.html                 # Главна страница
 ├── gallery.html              # Галерия
 ├── staff.html               # Персонал
-├── events.html              # События
+├── events.html              # Събития
 ├── calendar.html            # Календар
 ├── contacts.html            # Контакти
 ├── styles.css               # CSS стилове
@@ -27,7 +27,7 @@
 │   ├── articles.json       # Статии
 │   ├── gallery.json        # Снимки
 │   ├── staff.json          # Персонал
-│   ├── events.json         # События
+│   ├── events.json         # Събития
 │   └── contacts.json       # Контакти
 ├── admin/
 │   └── index.html          # Админ панел (временно)

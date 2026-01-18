@@ -48,7 +48,7 @@ git push -u origin main
 | `articles.json` | Статии на начална страница |
 | `gallery.json` | Снимки в галерия |
 | `staff.json` | Информация за учители |
-| `events.json` | Предстоящи события |
+| `events.json` | Предстоящи Събития |
 | `contacts.json` | Контактна информация |
 
 ### Редактиране директно на GitHub (препоръчано)
