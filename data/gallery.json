@@ -132,6 +132,41 @@
       "type": "image",
       "category": "Outdoor Activities",
       "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/trip-sofia.jpg"
+    },
+    {
+      "id": 20,
+      "title": "Двор и игрална площадка",
+      "type": "image",
+      "category": "Outdoor Activities",
+      "url": "gallery/dvor.jpeg"
+    },
+    {
+      "id": 21,
+      "title": "Столова за хранене",
+      "type": "image",
+      "category": "Facility",
+      "url": "gallery/stolove.jpeg"
+    },
+    {
+      "id": 22,
+      "title": "Гардеробчета",
+      "type": "image",
+      "category": "Facility",
+      "url": "gallery/shkafcheta.jpeg"
+    },
+    {
+      "id": 23,
+      "title": "Игра с топка",
+      "type": "image",
+      "category": "Sports",
+      "url": "gallery/top.jpg"
+    },
+    {
+      "id": 24,
+      "title": "Санитарен възел",
+      "type": "image",
+      "category": "Facility",
+      "url": "gallery/bak.jpeg"
     }
   ]
 }
