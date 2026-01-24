@@ -135,3 +135,113 @@ collections:
               - {label: "Име", name: "name", widget: "string"}
               - {label: "Текст", name: "text", widget: "text"}
               - {label: "Снимка", name: "photo", widget: "image", required: false}
+
+  # Pages Collection
+  - name: "pages"
+    label: "Страници"
+    files:
+      # Home Page
+      - label: "Начална страница"
+        name: "home"
+        file: "data/home.json"
+        format: "json"
+        fields:
+          - {label: "Заглавие (Добре дошли)", name: "welcomeTitle", widget: "string"}
+          - label: "Hero секция"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Заглавие", name: "title", widget: "string"}
+              - {label: "Описание", name: "description", widget: "text"}
+              - {label: "Текст на бутона", name: "buttonText", widget: "string"}
+          - label: "Функции (икони под hero)"
+            name: "features"
+            widget: "list"
+            fields:
+              - {label: "Икона (Emoji)", name: "icon", widget: "string"}
+              - {label: "Заглавие", name: "title", widget: "string"}
+              - {label: "Описание", name: "description", widget: "string"}
+          - {label: "Заглавие (Защо да изберете нас)", name: "whyChooseUsTitle", widget: "string"}
+          - label: "Защо да изберете нас - елементи"
+            name: "whyChooseUs"
+            widget: "list"
+            fields:
+              - {label: "Икона (Emoji)", name: "icon", widget: "string"}
+              - {label: "Заглавие", name: "title", widget: "string"}
+              - {label: "Описание", name: "string", widget: "string"}
+          - label: "Статистика"
+            name: "stats"
+            widget: "list"
+            fields:
+              - {label: "Стойност (напр. 15)", name: "value", widget: "string"}
+              - {label: "Етикет (напр. Години опит)", name: "label", widget: "string"}
+
+      # Admission Page
+      - label: "Страница Прием"
+        name: "admission"
+        file: "data/admission.json"
+        format: "json"
+        fields:
+          - {label: "Заглавие на страницата", name: "pageTitle", widget: "string"}
+          - label: "Hero секция"
+            name: "hero"
+            widget: "object"
+            fields:
+              - {label: "Заглавие", name: "title", widget: "string"}
+              - {label: "Описание", name: "description", widget: "text"}
+          - label: "Период на кандидатстване"
+            name: "applicationPeriod"
+            widget: "object"
+            fields:
+              - {label: "Заглавие", name: "title", widget: "string"}
+              - {label: "Съдържание (Markdown)", name: "content", widget: "markdown"}
+          - label: "Необходими документи"
+            name: "documents"
+            widget: "object"
+            fields:
+              - {label: "Заглавие на секцията", name: "title", widget: "string"}
+              - label: "Списък документи"
+                name: "list"
+                widget: "list"
+                fields:
+                  - {label: "Икона", name: "icon", widget: "string"}
+                  - {label: "Заглавие", name: "title", widget: "string"}
+                  - {label: "Описание", name: "description", widget: "string"}
+          - label: "Необходими консумативи"
+            name: "consumables"
+            widget: "object"
+            fields:
+              - {label: "Заглавие на секцията", name: "title", widget: "string"}
+              - label: "Списък консумативи"
+                name: "list"
+                widget: "list"
+                fields:
+                  - {label: "Икона", name: "icon", widget: "string"}
+                  - {label: "Заглавие", name: "title", widget: "string"}
+                  - {label: "Описание", name: "description", widget: "string"}
+          - label: "Цени и такси"
+            name: "fees"
+            widget: "object"
+            fields:
+              - {label: "Заглавие на секцията", name: "title", widget: "string"}
+              - {label: "Подзаглавие", name: "subtitle", widget: "string"}
+              - label: "Елементи (Такси)"
+                name: "items"
+                widget: "list"
+                fields:
+                  - {label: "Етикет", name: "label", widget: "string"}
+                  - {label: "Стойност", name: "value", widget: "string"}
+              - {label: "Бележка под линия", name: "note", widget: "string"}
+
+      # Contact Information
+      - label: "Контакти (Инфо)"
+        name: "contacts"
+        file: "data/contacts.json"
+        format: "json"
+        fields:
+          - {label: "Адрес", name: "address", widget: "string"}
+          - {label: "Телефон", name: "phone", widget: "string"}
+          - {label: "Email", name: "email", widget: "string"}
+          - {label: "Директор", name: "director", widget: "string"}
+          - {label: "Работни дни", name: "workingDays", widget: "string"}
+          - {label: "Работно време", name: "workingHours", widget: "string"}

@@ -28,6 +28,143 @@ function getEmbedUrl(url) {
     return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
 }
 
+// Helper to convert simple markdown to HTML (for admission period etc)
+function mdToHtml(text) {
+    if (!text) return '';
+    return text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\*(.*?)\*/g, '<em>$1</em>')
+        .replace(/\n/g, '<br>');
+}
+
+// Home Page Loader
+async function loadHome() {
+    const data = await loadJSON('home');
+    if (!data) return;
+
+    if (document.getElementById('welcome-title')) document.getElementById('welcome-title').textContent = data.welcomeTitle;
+
+    const hero = document.querySelector('.hero-content');
+    if (hero) {
+        hero.innerHTML = `
+            <h1>${data.hero.title}</h1>
+            <p>${data.hero.description}</p>
+            <a href="contacts.html" class="hero-btn">${data.hero.buttonText}</a>
+        `;
+    }
+
+    const features = document.querySelector('.features-section');
+    if (features && data.features) {
+        features.innerHTML = data.features.map(f => `
+            <div class="feature-card">
+                <div class="feature-icon">${f.icon}</div>
+                <h3>${f.title}</h3>
+                <p>${f.description}</p>
+            </div>
+        `).join('');
+    }
+
+    if (document.getElementById('why-choose-title')) document.getElementById('why-choose-title').textContent = data.whyChooseUsTitle;
+
+    const whyChooseGrid = document.querySelector('.why-choose-grid');
+    if (whyChooseGrid && data.whyChooseUs) {
+        whyChooseGrid.innerHTML = data.whyChooseUs.map(i => `
+            <div class="why-choose-item">
+                <div class="why-icon">${i.icon}</div>
+                <h3>${i.title}</h3>
+                <p>${i.description}</p>
+            </div>
+        `).join('');
+    }
+
+    const stats = document.querySelector('.stats-section');
+    if (stats && data.stats) {
+        stats.innerHTML = data.stats.map(s => `
+            <div class="stat-box">
+                <h4>${s.value}</h4>
+                <p>${s.label}</p>
+            </div>
+        `).join('');
+    }
+}
+
+// Admission Page Loader
+async function loadAdmission() {
+    const data = await loadJSON('admission');
+    if (!data) return;
+
+    if (document.getElementById('page-title')) document.getElementById('page-title').textContent = data.pageTitle;
+
+    const hero = document.querySelector('.hero-content');
+    if (hero) {
+        hero.innerHTML = `
+            <h1>${data.hero.title}</h1>
+            <p>${data.hero.description}</p>
+        `;
+    }
+
+    const period = document.getElementById('admission-period');
+    if (period) {
+        period.innerHTML = `
+            <h3>${data.applicationPeriod.title}</h3>
+            <div class="feature-card" style="text-align: left; border-top: 4px solid var(--accent);">
+                ${mdToHtml(data.applicationPeriod.content)}
+            </div>
+        `;
+    }
+
+    const docs = document.getElementById('documents-section');
+    if (docs) {
+        docs.innerHTML = `
+            <h3>${data.documents.title}</h3>
+            <div class="why-choose-grid">
+                ${data.documents.list.map(d => `
+                    <div class="why-choose-item">
+                        <div class="why-icon">${d.icon}</div>
+                        <h4>${d.title}</h4>
+                        <p>${d.description}</p>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    const items = document.getElementById('consumables-section');
+    if (items) {
+        items.innerHTML = `
+            <h3>${data.consumables.title}</h3>
+            <div class="why-choose-grid">
+                ${data.consumables.list.map(c => `
+                    <div class="why-choose-item">
+                        <div class="why-icon">${c.icon}</div>
+                        <h4>${c.title}</h4>
+                        <p>${c.description}</p>
+                    </div>
+                `).join('')}
+            </div>
+        `;
+    }
+
+    const fees = document.getElementById('fees-section');
+    if (fees) {
+        fees.innerHTML = `
+            <h3>${data.fees.title}</h3>
+            <div class="stat-box" style="text-align: left; max-width: 800px; margin: 0 auto;">
+                <h4 style="font-size: 1.5rem; text-align: center;">${data.fees.subtitle}</h4>
+                <ul style="list-style: none; padding: 1rem;">
+                    ${data.fees.items.map((it, idx, arr) => `
+                        <li style="display: flex; justify-content: space-between; padding: 0.5rem 0; ${idx !== arr.length - 1 ? 'border-bottom: 1px solid #eee;' : ''}">
+                            <span>${it.label}</span>
+                            <strong>${it.value}</strong>
+                        </li>
+                    `).join('')}
+                </ul>
+                <p style="text-align: center; font-size: 0.9rem; color: #666; margin-top: 1rem;">${data.fees.note}</p>
+            </div>
+        `;
+    }
+}
+
 // Lightbox Event Listeners
 document.addEventListener('DOMContentLoaded', function () {
     // Set site name in all logo elements
