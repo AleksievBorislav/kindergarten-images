@@ -7,8 +7,8 @@
       "content": "Радваме се да ви приветстваме! Нашата детска градина е място, където децата растат, учат и се развиват в безопасна и здравословна среда.",
       "expandedContent": "Добре дошли в Детски ясли Града! Ние сме посветени на предоставянето на висококачествено образование и грижа за вашите деца. Нашата мисия е да създадем любяща и стимулираща среда, където всяко дете може да се развива физически, емоционално и интелектуално. Нашите опитни учители използват модерни методи за обучение, включително игри, изкуства и спорт. Свържете се с нас за записване!",
       "images": [
-        "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/playground.jpg",
-        "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/learning.jpg"
+        "gallery/playground.jpg",
+        "gallery/learning.jpg"
       ],
       "videos": [
         "https://www.youtube.com/embed/sample1"
@@ -21,7 +21,7 @@
       "content": "Предлагаме специално намаляне на таксите за новите деца. За повече информация свържете се с администрацията.",
       "expandedContent": "За да направим образованието достъпно за всички семейства, въвеждаме намаление на таксите за месец януари. Новите деца могат да се възползват от 20% отстъпка. Това включва всички дейности, хранене и материали. За да се запишете, посетете нашата администрация или се свържете по телефона. Не пропускайте тази възможност!",
       "images": [
-        "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/celebration.jpg"
+        "gallery/celebration.jpg"
       ],
       "videos": []
     }

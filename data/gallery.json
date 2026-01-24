@@ -7,19 +7,19 @@
           "id": 1,
           "title": "Игра в градината",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/playground.jpg"
+          "url": "gallery/playground.jpg"
         },
         {
           "id": 2,
           "title": "Творческа дейност",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/art-activty.jpg"
+          "url": "gallery/art-activty.jpg"
         },
         {
           "id": 4,
           "title": "Обучение",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/learning.jpg"
+          "url": "gallery/learning.jpg"
         },
         {
           "id": 7,
@@ -36,7 +36,7 @@
           "id": 3,
           "title": "Детско тържество",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/celebration.jpg"
+          "url": "gallery/celebration.jpg"
         }
       ]
     },
@@ -47,7 +47,7 @@
           "id": 5,
           "title": "Екскурзия до София",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/trip-sofia.jpg"
+          "url": "gallery/trip-sofia.jpg"
         },
         {
           "id": 6,
@@ -64,25 +64,25 @@
           "id": 8,
           "title": "Игра навън",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/playground.jpg"
+          "url": "gallery/playground.jpg"
         },
         {
           "id": 9,
           "title": "Изкуство на открито",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/art-activty.jpg"
+          "url": "gallery/art-activty.jpg"
         },
         {
           "id": 10,
           "title": "Празник навън",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/celebration.jpg"
+          "url": "gallery/celebration.jpg"
         },
         {
           "id": 11,
           "title": "Учене навън",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/learning.jpg"
+          "url": "gallery/learning.jpg"
         },
         {
           "id": 12,
@@ -94,7 +94,7 @@
           "id": 19,
           "title": "Парк разходка",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/trip-sofia.jpg"
+          "url": "gallery/trip-sofia.jpg"
         },
         {
           "id": 20,
@@ -111,13 +111,13 @@
           "id": 13,
           "title": "Рисуване в клас",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/art-activty.jpg"
+          "url": "gallery/art-activty.jpg"
         },
         {
           "id": 14,
           "title": "Творчески проект",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/learning.jpg"
+          "url": "gallery/learning.jpg"
         },
         {
           "id": 15,
@@ -134,13 +134,13 @@
           "id": 16,
           "title": "Спортни игри",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/playground.jpg"
+          "url": "gallery/playground.jpg"
         },
         {
           "id": 17,
           "title": "Футбол",
           "type": "image",
-          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/celebration.jpg"
+          "url": "gallery/celebration.jpg"
         },
         {
           "id": 18,
