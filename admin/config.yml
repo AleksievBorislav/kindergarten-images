@@ -9,26 +9,19 @@ backend:
 publish_mode: editorial_workflow
 
 # Media files configuration
-media_folder: "gallery" # Where media files will be stored
-public_folder: "gallery" # Public URL path for media files
+media_folder: "gallery"
+public_folder: "gallery"
 
 # Collections define the structure for different content types
 collections:
-  # Gallery Collection
-  - name: "gallery"
-    label: "Галерия"
-    label_singular: "Медия"
-    folder: "data"
-    extension: "json"
-    format: "json"
-    create: false # Don't allow creating new files, only edit existing gallery.json
-    slug: "gallery"
-    editor:
-      preview: false
+  - name: "data"
+    label: "Данни на сайта"
     files:
+      # Gallery
       - label: "Галерия"
         name: "gallery"
         file: "data/gallery.json"
+        format: "json"
         fields:
           - label: "Медийни файлове"
             name: "media"
@@ -40,21 +33,11 @@ collections:
               - {label: "Категория", name: "category", widget: "string"}
               - {label: "URL", name: "url", widget: "string"}
 
-  # Staff Collection
-  - name: "staff"
-    label: "Персонал"
-    label_singular: "Член на персонала"
-    folder: "data"
-    extension: "json"
-    format: "json"
-    create: false
-    slug: "staff"
-    editor:
-      preview: false
-    files:
+      # Staff
       - label: "Персонал"
         name: "staff"
         file: "data/staff.json"
+        format: "json"
         fields:
           - label: "Членове"
             name: "members"
@@ -66,21 +49,11 @@ collections:
               - {label: "Биография", name: "bio", widget: "text"}
               - {label: "Снимка URL", name: "photo", widget: "string", required: false}
 
-  # Events Collection
-  - name: "events"
-    label: "Събития"
-    label_singular: "Събитие"
-    folder: "data"
-    extension: "json"
-    format: "json"
-    create: false
-    slug: "events"
-    editor:
-      preview: false
-    files:
+      # Events
       - label: "Събития"
         name: "events"
         file: "data/events.json"
+        format: "json"
         fields:
           - label: "Събития"
             name: "events"
@@ -92,21 +65,11 @@ collections:
               - {label: "Време", name: "time", widget: "string"}
               - {label: "Описание", name: "description", widget: "text"}
 
-  # Articles Collection
-  - name: "articles"
-    label: "Статии"
-    label_singular: "Статия"
-    folder: "data"
-    extension: "json"
-    format: "json"
-    create: false
-    slug: "articles"
-    editor:
-      preview: false
-    files:
+      # Articles
       - label: "Статии"
         name: "articles"
         file: "data/articles.json"
+        format: "json"
         fields:
           - label: "Статии"
             name: "articles"
@@ -120,21 +83,11 @@ collections:
               - {label: "Снимки", name: "images", widget: "list", required: false, field: {label: "URL", name: "url", widget: "string"}}
               - {label: "Видеа", name: "videos", widget: "list", required: false, field: {label: "URL", name: "url", widget: "string"}}
 
-  # FAQ Collection
-  - name: "faq"
-    label: "Често задавани въпроси"
-    label_singular: "Въпрос"
-    folder: "data"
-    extension: "json"
-    format: "json"
-    create: false
-    slug: "faq"
-    editor:
-      preview: false
-    files:
-      - label: "FAQ"
+      # FAQ
+      - label: "Често задавани въпроси"
         name: "faq"
         file: "data/faq.json"
+        format: "json"
         fields:
           - label: "Въпроси"
             name: "faqs"
@@ -144,21 +97,11 @@ collections:
               - {label: "Въпрос", name: "question", widget: "string"}
               - {label: "Отговор", name: "answer", widget: "text"}
 
-  # Testimonials Collection
-  - name: "testimonials"
-    label: "Отзиви"
-    label_singular: "Отзив"
-    folder: "data"
-    extension: "json"
-    format: "json"
-    create: false
-    slug: "testimonials"
-    editor:
-      preview: false
-    files:
+      # Testimonials
       - label: "Отзиви"
         name: "testimonials"
         file: "data/testimonials.json"
+        format: "json"
         fields:
           - label: "Отзиви"
             name: "testimonials"
