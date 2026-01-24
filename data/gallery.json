@@ -26,6 +26,12 @@
           "title": "Музикална игра",
           "type": "video",
           "url": "https://www.youtube.com/embed/sample-music"
+        },
+        {
+          "url": "https://www.youtube.com/watch?v=AD6wqKo51MU",
+          "id": 1234,
+          "title": "Shoot to thrill",
+          "type": "video"
         }
       ]
     },
