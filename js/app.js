@@ -14,42 +14,42 @@ async function loadJSON(filename) {
 }
 
 // Lightbox Event Listeners
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     // Set site name in all logo elements
     document.querySelectorAll('.logo').forEach(el => el.textContent = SITE_NAME);
-    
+
     // Replace site name in title and footer
     document.title = document.title.replace('Детски ясли Града', SITE_NAME);
     document.querySelectorAll('footer p').forEach(el => {
         el.innerHTML = el.innerHTML.replace('Детски ясли Града', SITE_NAME);
     });
-    
+
     // Close lightbox with X button
     const closeBtn = document.querySelector('.lightbox-close');
     if (closeBtn) {
         closeBtn.onclick = closeLightbox;
     }
-    
+
     // Close lightbox when clicking outside image
     const lightbox = document.getElementById('lightbox');
     if (lightbox) {
-        lightbox.onclick = function(event) {
+        lightbox.onclick = function (event) {
             if (event.target === lightbox) {
                 closeLightbox();
             }
         };
     }
-    
+
     // Next/Prev buttons
     const prevBtn = document.querySelector('.lightbox-prev');
     const nextBtn = document.querySelector('.lightbox-next');
     if (prevBtn) prevBtn.onclick = prevImage;
     if (nextBtn) nextBtn.onclick = nextImage;
-    
+
     // Keyboard shortcuts
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('keydown', function (event) {
         if (!lightbox || !lightbox.classList.contains('active')) return;
-        
+
         if (event.key === 'ArrowLeft') prevImage();
         if (event.key === 'ArrowRight') nextImage();
         if (event.key === 'Escape') closeLightbox();
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
 async function loadArticles() {
     const data = await loadJSON('articles');
     const container = document.getElementById('articles');
-    
+
     if (!data || !data.articles) {
         container.innerHTML = '<p>Няма налични статии.</p>';
         return;
@@ -96,16 +96,16 @@ function openArticleModal(index) {
 }
 
 // Close modal when clicking close button
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     const modal = document.getElementById('articleModal');
     if (modal) {
         const closeBtn = modal.querySelector('.close');
         if (closeBtn) {
-            closeBtn.onclick = function() {
+            closeBtn.onclick = function () {
                 modal.style.display = 'none';
             };
         }
-        window.onclick = function(event) {
+        window.onclick = function (event) {
             if (event.target == modal) {
                 modal.style.display = 'none';
             }
@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', function() {
 async function loadTestimonials() {
     const data = await loadJSON('testimonials');
     const container = document.getElementById('testimonials');
-    
+
     if (!data || !data.testimonials) {
         container.innerHTML = '<p>Няма налични отзиви.</p>';
         return;
@@ -136,7 +136,7 @@ async function loadTestimonials() {
 async function loadFAQ() {
     const data = await loadJSON('faq');
     const container = document.getElementById('faq');
-    
+
     if (!data || !data.faqs) {
         container.innerHTML = '<p>Няма налични въпроси.</p>';
         return;
@@ -171,7 +171,7 @@ function toggleFAQ(element) {
 async function loadGallery() {
     const data = await loadJSON('gallery');
     const container = document.getElementById('gallery');
-    
+
     if (!data || !data.media) {
         container.innerHTML = '<p>Няма налични медии.</p>';
         return;
@@ -190,24 +190,25 @@ async function loadGallery() {
         const items = categories[category];
         const stackItems = items.slice(0, 5);
         const hasMore = items.length > 5;
-        
+
         return `
         <div class="gallery-category">
             <h3 onclick="openCategoryLightbox('${category}')">${category}</h3>
             <div class="gallery-stack" onclick="openCategoryLightbox('${category}')">
                 ${stackItems.map((item, index) => `
                     <div class="gallery-item stack-item" style="left: ${index * 210}px;">
-                        ${item.type === 'video' ? 
-                            `<iframe src="${item.url}" frameborder="0" allowfullscreen onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"></iframe><div style="display:none; text-align:center; height:200px; display:flex; align-items:center; justify-content:center;">🎥 Видео не е налично</div>` :
-                            `<img src="${item.url || 'https://via.placeholder.com/300x200?text=Image'}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/300x200?text=Broken+Image'">`
-                        }
+                        ${item.type === 'video' ?
+                `<iframe src="${item.url}" frameborder="0" allowfullscreen onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"></iframe><div style="display:none; text-align:center; height:200px; display:flex; align-items:center; justify-content:center;">🎥 Видео не е налично</div>` :
+                `<img src="${item.url || 'https://via.placeholder.com/300x200?text=Image'}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/300x200?text=Broken+Image'">`
+            }
                     </div>
                 `).join('')}
                 ${hasMore ? `<div class="more-indicator">+${items.length - 5} повече</div>` : ''}
             </div>
         </div>
-    `;}).join('');
-    
+    `;
+    }).join('');
+
     // Store gallery data globally for lightbox
     window.galleryData = categories;
 }
@@ -226,12 +227,12 @@ function openLightbox(category, index) {
     const img = document.getElementById('lightbox-img');
     const iframe = document.getElementById('lightbox-video');
     const item = window.galleryData[category][index];
-    
+
     if (item.type === 'video') {
         img.style.display = 'none';
         iframe.style.display = 'block';
         iframe.src = item.url;
-        iframe.onerror = function() {
+        iframe.onerror = function () {
             this.style.display = 'none';
             const errorMsg = document.createElement('div');
             errorMsg.textContent = 'Видео не е налично';
@@ -243,11 +244,11 @@ function openLightbox(category, index) {
         img.style.display = 'block';
         iframe.style.display = 'none';
         img.src = item.url;
-        img.onerror = function() {
+        img.onerror = function () {
             this.src = 'https://via.placeholder.com/600x400?text=Broken+Image';
         };
     }
-    
+
     lightbox.classList.add('active');
     updateLightboxThumbs();
 }
@@ -285,7 +286,7 @@ function updateLightboxThumbs() {
 async function loadStaff() {
     const data = await loadJSON('staff');
     const container = document.getElementById('staff');
-    
+
     if (!data || !data.members) {
         container.innerHTML = '<p>Няма налични членове на персонала.</p>';
         return;
@@ -307,7 +308,7 @@ async function loadStaff() {
 async function loadEvents() {
     const data = await loadJSON('events');
     const container = document.getElementById('events');
-    
+
     if (!data || !data.events) {
         container.innerHTML = '<p>Няма налични събития.</p>';
         return;
@@ -329,19 +330,19 @@ let currentDate = new Date();
 function generateCalendar() {
     const year = currentDate.getFullYear();
     const month = currentDate.getMonth();
-    
+
     const monthNames = [
         'Януари', 'Февруари', 'Март', 'Април', 'Май', 'Юни',
         'Юли', 'Август', 'Септември', 'Октомври', 'Ноември', 'Декември'
     ];
-    
+
     const dayNames = ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Нд'];
-    
+
     const firstDay = new Date(year, month, 1);
     const lastDay = new Date(year, month + 1, 0);
     const daysInMonth = lastDay.getDate();
     const startingDayOfWeek = (firstDay.getDay() + 6) % 7; // Monday = 0
-    
+
     let html = `
         <div class="calendar-header">
             <button onclick="previousMonth()">← Назад</button>
@@ -350,29 +351,29 @@ function generateCalendar() {
         </div>
         <div class="calendar-grid">
     `;
-    
+
     // Day headers
     dayNames.forEach(day => {
         html += `<div class="calendar-day-header">${day}</div>`;
     });
-    
+
     // Empty cells before first day
     for (let i = 0; i < startingDayOfWeek; i++) {
         html += `<div class="calendar-day other-month"></div>`;
     }
-    
+
     // Days of month
     for (let day = 1; day <= daysInMonth; day++) {
-        const isToday = day === new Date().getDate() && 
-                       month === new Date().getMonth() && 
-                       year === new Date().getFullYear();
+        const isToday = day === new Date().getDate() &&
+            month === new Date().getMonth() &&
+            year === new Date().getFullYear();
         const dateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
         const hasEvent = eventDates.includes(dateStr);
-        
+
         // Calculate day of week (0 = Monday, 6 = Sunday, 5 = Saturday)
         const dayOfWeek = (new Date(year, month, day).getDay() + 6) % 7;
         const isWeekend = dayOfWeek === 5 || dayOfWeek === 6; // Saturday or Sunday
-        
+
         html += `
             <div class="calendar-day ${isToday ? 'today' : ''} ${hasEvent ? 'has-event' : ''} ${isWeekend ? 'weekend' : ''}" 
                  onclick="selectDate('${dateStr}')">
@@ -380,9 +381,9 @@ function generateCalendar() {
             </div>
         `;
     }
-    
+
     html += '</div>';
-    
+
     return html;
 }
 
@@ -392,11 +393,11 @@ async function loadCalendar() {
     const data = await loadJSON('events');
     const container = document.getElementById('calendar');
     const eventsContainer = document.getElementById('calendar-events');
-    
+
     if (data && data.events) {
         eventDates = data.events.map(e => e.date.split('T')[0]);
     }
-    
+
     container.innerHTML = generateCalendar();
     selectDate(new Date().toISOString().split('T')[0]);
 }
@@ -414,30 +415,30 @@ function nextMonth() {
 async function selectDate(dateStr) {
     const data = await loadJSON('events');
     const container = document.getElementById('calendar-events');
-    
+
     const dateObj = new Date(dateStr);
     const dayNames = ['неделя', 'понеделник', 'вторник', 'сряда', 'четвъртък', 'петък', 'събота'];
     const monthNames = [
         'януари', 'февруари', 'март', 'април', 'май', 'юни',
         'юли', 'август', 'септември', 'октомври', 'ноември', 'декември'
     ];
-    
+
     const day = dateObj.getDate();
     const dayName = dayNames[dateObj.getDay()];
     const month = monthNames[dateObj.getMonth()];
     const year = dateObj.getFullYear();
     const dayOfWeek = (dateObj.getDay() + 6) % 7;
     const isWeekend = dayOfWeek === 5 || dayOfWeek === 6;
-    
+
     let html = `<h3>${day} ${month} ${year} г. (${dayName})`;
     if (isWeekend) {
         html += ` <span style="background: #fff5e6; color: #c9944d; padding: 2px 8px; border-radius: 4px; font-size: 0.85em;">Почивен ден</span>`;
     }
     html += `</h3>`;
-    
+
     if (data && data.events) {
         const eventsOnDate = data.events.filter(e => e.date.split('T')[0] === dateStr);
-        
+
         if (eventsOnDate.length > 0) {
             html += eventsOnDate.map(event => `
                 <div class="calendar-event-item" style="background: #fef9f3; border-left: 4px solid #d4a574;">
@@ -450,7 +451,7 @@ async function selectDate(dateStr) {
             html += '<p>Няма събития на този ден.</p>';
         }
     }
-    
+
     container.innerHTML = html;
 }
 
@@ -458,7 +459,7 @@ async function selectDate(dateStr) {
 async function loadContacts() {
     const data = await loadJSON('contacts');
     const container = document.getElementById('contacts');
-    
+
     if (!data) {
         container.innerHTML = '<p>Контактната информация не е налична.</p>';
         return;

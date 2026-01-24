@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="bg">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,12 +10,14 @@
     <title>Детски ясли Града - Начало</title>
     <link rel="stylesheet" href="styles.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="nav-container">
             <h1 class="logo">Обединени детски ясли</h1>
             <ul class="nav-menu">
                 <li><a href="index.html" class="nav-link active">Начало</a></li>
+                <li><a href="admission.html" class="nav-link">Прием</a></li>
                 <li><a href="gallery.html" class="nav-link">Галерия</a></li>
                 <li><a href="staff.html" class="nav-link">Персонал</a></li>
                 <li><a href="events.html" class="nav-link">Събития</a></li>
@@ -26,13 +29,13 @@
 
     <main class="container">
         <h2>Добре дошли!</h2>
-        
+
         <!-- Hero Section -->
         <div class="hero-section">
             <div class="hero-content">
                 <h1>Над 15 години грижа за вашите деца</h1>
                 <p>Създаваме безопасна и стимулираща среда за цялостното развитие на детето.</p>
-                <a href="#contacts" class="hero-btn">Свържете се с нас</a>
+                <a href="contacts.html" class="hero-btn">Свържете се с нас</a>
             </div>
         </div>
 
@@ -121,27 +124,28 @@
             <div id="articles" class="articles-section"></div>
         </div>
 
-    <footer>
-        <p>&copy; 2026 Обединени детски ясли. Всички права запазени.</p>
-    </footer>
+        <footer>
+            <p>&copy; 2026 Обединени детски ясли. Всички права запазени.</p>
+        </footer>
 
-    <!-- Article Modal -->
-    <div id="articleModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2 id="modalTitle"></h2>
-            <p id="modalDate"></p>
-            <div id="modalContent"></div>
-            <div id="modalImages"></div>
-            <div id="modalVideos"></div>
+        <!-- Article Modal -->
+        <div id="articleModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2 id="modalTitle"></h2>
+                <p id="modalDate"></p>
+                <div id="modalContent"></div>
+                <div id="modalImages"></div>
+                <div id="modalVideos"></div>
+            </div>
         </div>
-    </div>
 
-    <script src="js/app.js?v=2"></script>
-    <script>
-        loadArticles();
-        loadTestimonials();
-        loadFAQ();
-    </script>
+        <script src="js/app.js?v=2"></script>
+        <script>
+            loadArticles();
+            loadTestimonials();
+            loadFAQ();
+        </script>
 </body>
+
 </html>
