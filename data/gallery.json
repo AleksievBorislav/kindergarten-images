@@ -1,172 +1,183 @@
 {
-  "media": [
+  "categories": [
     {
-      "id": 1,
-      "title": "Игра в градината",
-      "type": "image",
-      "category": "Ежедневни дейности",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/playground.jpg"
+      "name": "Ежедневни дейности",
+      "items": [
+        {
+          "id": 1,
+          "title": "Игра в градината",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/playground.jpg"
+        },
+        {
+          "id": 2,
+          "title": "Творческа дейност",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/art-activty.jpg"
+        },
+        {
+          "id": 4,
+          "title": "Обучение",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/learning.jpg"
+        },
+        {
+          "id": 7,
+          "title": "Музикална игра",
+          "type": "video",
+          "url": "https://www.youtube.com/embed/sample-music"
+        }
+      ]
     },
     {
-      "id": 2,
-      "title": "Творческа дейност",
-      "type": "image",
-      "category": "Ежедневни дейности",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/art-activty.jpg"
+      "name": "Събития",
+      "items": [
+        {
+          "id": 3,
+          "title": "Детско тържество",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/celebration.jpg"
+        }
+      ]
     },
     {
-      "id": 3,
-      "title": "Детско тържество",
-      "type": "image",
-      "category": "Събития",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/celebration.jpg"
+      "name": "Екскурзия до София",
+      "items": [
+        {
+          "id": 5,
+          "title": "Екскурзия до София",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/trip-sofia.jpg"
+        },
+        {
+          "id": 6,
+          "title": "Видео от екскурзията",
+          "type": "video",
+          "url": "https://www.youtube.com/embed/sample-trip"
+        }
+      ]
     },
     {
-      "id": 4,
-      "title": "Обучение",
-      "type": "image",
-      "category": "Ежедневни дейности",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/learning.jpg"
+      "name": "Игри на открито",
+      "items": [
+        {
+          "id": 8,
+          "title": "Игра навън",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/playground.jpg"
+        },
+        {
+          "id": 9,
+          "title": "Изкуство на открито",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/art-activty.jpg"
+        },
+        {
+          "id": 10,
+          "title": "Празник навън",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/celebration.jpg"
+        },
+        {
+          "id": 11,
+          "title": "Учене навън",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/learning.jpg"
+        },
+        {
+          "id": 12,
+          "title": "Видео от игрите",
+          "type": "video",
+          "url": "https://www.youtube.com/embed/sample-trip"
+        },
+        {
+          "id": 19,
+          "title": "Парк разходка",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/trip-sofia.jpg"
+        },
+        {
+          "id": 20,
+          "title": "Двор и игрална площадка",
+          "type": "image",
+          "url": "gallery/dvor.jpeg"
+        }
+      ]
     },
     {
-      "id": 5,
-      "title": "Екскурзия до София",
-      "type": "image",
-      "category": "Екскурзия до София",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/trip-sofia.jpg"
+      "name": "Арт занимания",
+      "items": [
+        {
+          "id": 13,
+          "title": "Рисуване в клас",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/art-activty.jpg"
+        },
+        {
+          "id": 14,
+          "title": "Творчески проект",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/learning.jpg"
+        },
+        {
+          "id": 15,
+          "title": "Арт видео",
+          "type": "video",
+          "url": "https://www.youtube.com/embed/sample-music"
+        }
+      ]
     },
     {
-      "id": 6,
-      "title": "Видео от екскурзията",
-      "type": "video",
-      "category": "Екскурзия до София",
-      "url": "https://www.youtube.com/embed/sample-trip"
+      "name": "Спорт",
+      "items": [
+        {
+          "id": 16,
+          "title": "Спортни игри",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/playground.jpg"
+        },
+        {
+          "id": 17,
+          "title": "Футбол",
+          "type": "image",
+          "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/celebration.jpg"
+        },
+        {
+          "id": 18,
+          "title": "Спортно видео",
+          "type": "video",
+          "url": "https://www.youtube.com/embed/sample-trip"
+        },
+        {
+          "id": 23,
+          "title": "Игра с топка",
+          "type": "image",
+          "url": "gallery/top.jpg"
+        }
+      ]
     },
     {
-      "id": 7,
-      "title": "Музикална игра",
-      "type": "video",
-      "category": "Ежедневни дейности",
-      "url": "https://www.youtube.com/embed/sample-music"
-    },
-    {
-      "id": 8,
-      "title": "Игра навън",
-      "type": "image",
-      "category": "Игри на открито",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/playground.jpg"
-    },
-    {
-      "id": 9,
-      "title": "Изкуство на открито",
-      "type": "image",
-      "category": "Игри на открито",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/art-activty.jpg"
-    },
-    {
-      "id": 10,
-      "title": "Празник навън",
-      "type": "image",
-      "category": "Игри на открито",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/celebration.jpg"
-    },
-    {
-      "id": 11,
-      "title": "Учене навън",
-      "type": "image",
-      "category": "Игри на открито",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/learning.jpg"
-    },
-    {
-      "id": 12,
-      "title": "Видео от игрите",
-      "type": "video",
-      "category": "Игри на открито",
-      "url": "https://www.youtube.com/embed/sample-trip"
-    },
-    {
-      "id": 13,
-      "title": "Рисуване в клас",
-      "type": "image",
-      "category": "Арт занимания",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/art-activty.jpg"
-    },
-    {
-      "id": 14,
-      "title": "Творчески проект",
-      "type": "image",
-      "category": "Арт занимания",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/learning.jpg"
-    },
-    {
-      "id": 15,
-      "title": "Арт видео",
-      "type": "video",
-      "category": "Арт занимания",
-      "url": "https://www.youtube.com/embed/sample-music"
-    },
-    {
-      "id": 16,
-      "title": "Спортни игри",
-      "type": "image",
-      "category": "Спорт",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/playground.jpg"
-    },
-    {
-      "id": 17,
-      "title": "Футбол",
-      "type": "image",
-      "category": "Спорт",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/celebration.jpg"
-    },
-    {
-      "id": 18,
-      "title": "Спортно видео",
-      "type": "video",
-      "category": "Спорт",
-      "url": "https://www.youtube.com/embed/sample-trip"
-    },
-    {
-      "id": 19,
-      "title": "Парк разходка",
-      "type": "image",
-      "category": "Игри на открито",
-      "url": "https://raw.githubusercontent.com/AleksievBorislav/kindergarten-images/main/gallery/trip-sofia.jpg"
-    },
-    {
-      "id": 20,
-      "title": "Двор и игрална площадка",
-      "type": "image",
-      "category": "Игри на открито",
-      "url": "gallery/dvor.jpeg"
-    },
-    {
-      "id": 21,
-      "title": "Столова за хранене",
-      "type": "image",
-      "category": "Материална база",
-      "url": "gallery/stolove.jpeg"
-    },
-    {
-      "id": 22,
-      "title": "Гардеробчета",
-      "type": "image",
-      "category": "Материална база",
-      "url": "gallery/shkafcheta.jpeg"
-    },
-    {
-      "id": 23,
-      "title": "Игра с топка",
-      "type": "image",
-      "category": "Спорт",
-      "url": "gallery/top.jpg"
-    },
-    {
-      "id": 24,
-      "title": "Санитарен възел",
-      "type": "image",
-      "category": "Материална база",
-      "url": "gallery/bak.jpeg"
+      "name": "Материална база",
+      "items": [
+        {
+          "id": 21,
+          "title": "Столова за хранене",
+          "type": "image",
+          "url": "gallery/stolove.jpeg"
+        },
+        {
+          "id": 22,
+          "title": "Гардеробчета",
+          "type": "image",
+          "url": "gallery/shkafcheta.jpeg"
+        },
+        {
+          "id": 24,
+          "title": "Санитарен възел",
+          "type": "image",
+          "url": "gallery/bak.jpeg"
+        }
+      ]
     }
   ]
 }

@@ -172,22 +172,14 @@ async function loadGallery() {
     const data = await loadJSON('gallery');
     const container = document.getElementById('gallery');
 
-    if (!data || !data.media) {
+    if (!data || !data.categories) {
         container.innerHTML = '<p>Няма налични медии.</p>';
         return;
     }
 
-    // Group by category
-    const categories = {};
-    data.media.forEach(item => {
-        if (!categories[item.category]) {
-            categories[item.category] = [];
-        }
-        categories[item.category].push(item);
-    });
-
-    container.innerHTML = Object.keys(categories).map(category => {
-        const items = categories[category];
+    container.innerHTML = data.categories.map(categoryObj => {
+        const category = categoryObj.name;
+        const items = categoryObj.items;
         const stackItems = items.slice(0, 5);
         const hasMore = items.length > 5;
 
@@ -210,7 +202,11 @@ async function loadGallery() {
     }).join('');
 
     // Store gallery data globally for lightbox
-    window.galleryData = categories;
+    const flatGalleryData = {};
+    data.categories.forEach(cat => {
+        flatGalleryData[cat.name] = cat.items;
+    });
+    window.galleryData = flatGalleryData;
 }
 
 function openCategoryLightbox(category) {
@@ -314,7 +310,21 @@ async function loadEvents() {
         return;
     }
 
-    container.innerHTML = data.events.map(event => `
+    const now = new Date();
+    // Set time to beginning of day to include today's events
+    now.setHours(0, 0, 0, 0);
+
+    const upcomingEvents = data.events
+        .filter(event => new Date(event.date) >= now)
+        .sort((a, b) => new Date(a.date) - new Date(b.date))
+        .slice(0, 5);
+
+    if (upcomingEvents.length === 0) {
+        container.innerHTML = '<p>Няма предстоящи събития.</p>';
+        return;
+    }
+
+    container.innerHTML = upcomingEvents.map(event => `
         <div class="event-card">
             <div class="event-date">${new Date(event.date).toLocaleDateString('bg-BG')}</div>
             <h3>${event.title}</h3>
