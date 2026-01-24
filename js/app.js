@@ -13,6 +13,21 @@ async function loadJSON(filename) {
     }
 }
 
+// Helper to convert YouTube URL to embed format
+function getEmbedUrl(url) {
+    if (!url) return '';
+    if (url.includes('youtube.com/embed/')) return url;
+
+    let videoId = '';
+    if (url.includes('youtube.com/watch?v=')) {
+        videoId = url.split('v=')[1].split('&')[0];
+    } else if (url.includes('youtu.be/')) {
+        videoId = url.split('youtu.be/')[1].split('?')[0];
+    }
+
+    return videoId ? `https://www.youtube.com/embed/${videoId}` : url;
+}
+
 // Lightbox Event Listeners
 document.addEventListener('DOMContentLoaded', function () {
     // Set site name in all logo elements
@@ -190,7 +205,7 @@ async function loadGallery() {
                 ${stackItems.map((item, index) => `
                     <div class="gallery-item stack-item" style="left: ${index * 210}px;">
                         ${item.type === 'video' ?
-                `<iframe src="${item.url}" frameborder="0" allowfullscreen onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"></iframe><div style="display:none; text-align:center; height:200px; display:flex; align-items:center; justify-content:center;">🎥 Видео не е налично</div>` :
+                `<iframe src="${getEmbedUrl(item.url)}" frameborder="0" allowfullscreen onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"></iframe><div style="display:none; text-align:center; height:200px; display:flex; align-items:center; justify-content:center;">🎥 Видео не е налично</div>` :
                 `<img src="${item.url || 'https://via.placeholder.com/300x200?text=Image'}" alt="${item.title}" onerror="this.src='https://via.placeholder.com/300x200?text=Broken+Image'">`
             }
                     </div>
@@ -227,7 +242,7 @@ function openLightbox(category, index) {
     if (item.type === 'video') {
         img.style.display = 'none';
         iframe.style.display = 'block';
-        iframe.src = item.url;
+        iframe.src = getEmbedUrl(item.url);
         iframe.onerror = function () {
             this.style.display = 'none';
             const errorMsg = document.createElement('div');
