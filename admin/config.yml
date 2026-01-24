@@ -5,21 +5,18 @@ backend:
   base_url: https://kindergarten-cms-oauth.onrender.com
   auth_endpoint: auth
 
-# Publish mode: editorial workflow enables drafts
 publish_mode: editorial_workflow
 
-# Media files configuration
 media_folder: "gallery"
 public_folder: "gallery"
 
-# Collections define the structure for different content types
 collections:
-  - name: "data"
-    label: "Данни на сайта"
+  # Gallery Collection (Restructured for categories)
+  - name: "gallery"
+    label: "Галерия"
     files:
-      # Gallery
-      - label: "Галерия"
-        name: "gallery"
+      - label: "Галерия по категории"
+        name: "gallery_data"
         file: "data/gallery.json"
         format: "json"
         fields:
@@ -37,9 +34,12 @@ collections:
                   - {label: "Тип", name: "type", widget: "select", options: ["image", "video"]}
                   - {label: "Файл/URL", name: "url", widget: "image"}
 
-      # Staff
-      - label: "Персонал"
-        name: "staff"
+  # Staff Collection
+  - name: "staff"
+    label: "Персонал"
+    files:
+      - label: "Списък персонал"
+        name: "staff_data"
         file: "data/staff.json"
         format: "json"
         fields:
@@ -53,9 +53,12 @@ collections:
               - {label: "Биография", name: "bio", widget: "text"}
               - {label: "Снимка", name: "photo", widget: "image", required: false}
 
-      # Events
-      - label: "Събития"
-        name: "events"
+  # Events Collection
+  - name: "events"
+    label: "Събития"
+    files:
+      - label: "Календар и списък"
+        name: "events_data"
         file: "data/events.json"
         format: "json"
         fields:
@@ -69,9 +72,12 @@ collections:
               - {label: "Време", name: "time", widget: "string"}
               - {label: "Описание", name: "description", widget: "text"}
 
-      # Articles
-      - label: "Статии"
-        name: "articles"
+  # Articles Collection
+  - name: "articles"
+    label: "Статии"
+    files:
+      - label: "Новини от началната страница"
+        name: "articles_data"
         file: "data/articles.json"
         format: "json"
         fields:
@@ -84,12 +90,23 @@ collections:
               - {label: "Дата", name: "date", widget: "datetime"}
               - {label: "Съдържание", name: "content", widget: "text"}
               - {label: "Разширено съдържание", name: "expandedContent", widget: "text", required: false}
-              - {label: "Снимки", name: "images", widget: "list", required: false, field: {label: "Снимка", name: "url", widget: "image"}}
-              - {label: "Видеа", name: "videos", widget: "list", required: false, field: {label: "URL", name: "url", widget: "string"}}
+              - label: "Снимки"
+                name: "images"
+                widget: "list"
+                required: false
+                field: {label: "Снимка", name: "url", widget: "image"}
+              - label: "Видеа"
+                name: "videos"
+                widget: "list"
+                required: false
+                field: {label: "URL", name: "url", widget: "string"}
 
-      # FAQ
-      - label: "Често задавани въпроси"
-        name: "faq"
+  # FAQ Collection
+  - name: "faq"
+    label: "Често задавани въпроси"
+    files:
+      - label: "Въпроси и отговори"
+        name: "faq_data"
         file: "data/faq.json"
         format: "json"
         fields:
@@ -101,9 +118,12 @@ collections:
               - {label: "Въпрос", name: "question", widget: "string"}
               - {label: "Отговор", name: "answer", widget: "text"}
 
-      # Testimonials
-      - label: "Отзиви"
-        name: "testimonials"
+  # Testimonials Collection
+  - name: "testimonials"
+    label: "Отзиви"
+    files:
+      - label: "Отзиви от родители"
+        name: "testimonials_data"
         file: "data/testimonials.json"
         format: "json"
         fields:
