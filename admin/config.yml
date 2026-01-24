@@ -1,0 +1,170 @@
+backend:
+  name: github
+  repo: AleksievBorislav/kindergarten-images
+  branch: main
+  base_url: https://kindergarten-cms-oauth.onrender.com
+  auth_endpoint: auth
+
+# Publish mode: editorial workflow enables drafts
+publish_mode: editorial_workflow
+
+# Media files configuration
+media_folder: "gallery" # Where media files will be stored
+public_folder: "gallery" # Public URL path for media files
+
+# Collections define the structure for different content types
+collections:
+  # Gallery Collection
+  - name: "gallery"
+    label: "Галерия"
+    label_singular: "Медия"
+    folder: "data"
+    extension: "json"
+    format: "json"
+    create: false # Don't allow creating new files, only edit existing gallery.json
+    slug: "gallery"
+    editor:
+      preview: false
+    files:
+      - label: "Галерия"
+        name: "gallery"
+        file: "data/gallery.json"
+        fields:
+          - label: "Медийни файлове"
+            name: "media"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "number"}
+              - {label: "Заглавие", name: "title", widget: "string"}
+              - {label: "Тип", name: "type", widget: "select", options: ["image", "video"]}
+              - {label: "Категория", name: "category", widget: "string"}
+              - {label: "URL", name: "url", widget: "string"}
+
+  # Staff Collection
+  - name: "staff"
+    label: "Персонал"
+    label_singular: "Член на персонала"
+    folder: "data"
+    extension: "json"
+    format: "json"
+    create: false
+    slug: "staff"
+    editor:
+      preview: false
+    files:
+      - label: "Персонал"
+        name: "staff"
+        file: "data/staff.json"
+        fields:
+          - label: "Членове"
+            name: "members"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "number"}
+              - {label: "Име", name: "name", widget: "string"}
+              - {label: "Позиция", name: "position", widget: "string"}
+              - {label: "Биография", name: "bio", widget: "text"}
+              - {label: "Снимка URL", name: "photo", widget: "string", required: false}
+
+  # Events Collection
+  - name: "events"
+    label: "Събития"
+    label_singular: "Събитие"
+    folder: "data"
+    extension: "json"
+    format: "json"
+    create: false
+    slug: "events"
+    editor:
+      preview: false
+    files:
+      - label: "Събития"
+        name: "events"
+        file: "data/events.json"
+        fields:
+          - label: "Събития"
+            name: "events"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "number"}
+              - {label: "Заглавие", name: "title", widget: "string"}
+              - {label: "Дата", name: "date", widget: "datetime"}
+              - {label: "Време", name: "time", widget: "string"}
+              - {label: "Описание", name: "description", widget: "text"}
+
+  # Articles Collection
+  - name: "articles"
+    label: "Статии"
+    label_singular: "Статия"
+    folder: "data"
+    extension: "json"
+    format: "json"
+    create: false
+    slug: "articles"
+    editor:
+      preview: false
+    files:
+      - label: "Статии"
+        name: "articles"
+        file: "data/articles.json"
+        fields:
+          - label: "Статии"
+            name: "articles"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "number"}
+              - {label: "Заглавие", name: "title", widget: "string"}
+              - {label: "Дата", name: "date", widget: "datetime"}
+              - {label: "Съдържание", name: "content", widget: "text"}
+              - {label: "Разширено съдържание", name: "expandedContent", widget: "text", required: false}
+              - {label: "Снимки", name: "images", widget: "list", required: false, field: {label: "URL", name: "url", widget: "string"}}
+              - {label: "Видеа", name: "videos", widget: "list", required: false, field: {label: "URL", name: "url", widget: "string"}}
+
+  # FAQ Collection
+  - name: "faq"
+    label: "Често задавани въпроси"
+    label_singular: "Въпрос"
+    folder: "data"
+    extension: "json"
+    format: "json"
+    create: false
+    slug: "faq"
+    editor:
+      preview: false
+    files:
+      - label: "FAQ"
+        name: "faq"
+        file: "data/faq.json"
+        fields:
+          - label: "Въпроси"
+            name: "faqs"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "number"}
+              - {label: "Въпрос", name: "question", widget: "string"}
+              - {label: "Отговор", name: "answer", widget: "text"}
+
+  # Testimonials Collection
+  - name: "testimonials"
+    label: "Отзиви"
+    label_singular: "Отзив"
+    folder: "data"
+    extension: "json"
+    format: "json"
+    create: false
+    slug: "testimonials"
+    editor:
+      preview: false
+    files:
+      - label: "Отзиви"
+        name: "testimonials"
+        file: "data/testimonials.json"
+        fields:
+          - label: "Отзиви"
+            name: "testimonials"
+            widget: "list"
+            fields:
+              - {label: "ID", name: "id", widget: "number"}
+              - {label: "Име", name: "name", widget: "string"}
+              - {label: "Текст", name: "text", widget: "text"}
+              - {label: "Снимка URL", name: "photo", widget: "string", required: false}
